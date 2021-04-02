@@ -1,0 +1,28 @@
+.card{
+    box-shadow: 1px, grey;
+    width: 18rem;
+}
+.card-footer{
+    background-color: rgb(255, 255, 255);
+    border: none;
+}
+.card-footer .btn{
+    margin-left: 50px;
+}
+.price{
+    color:rgb(36, 129, 59);
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    /* cursor: not-allowed; */
+    pointer-events: none;
+}
+.card-img-top{
+    height:200px;
+    padding:7px;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    object-fit: cover;
+}
