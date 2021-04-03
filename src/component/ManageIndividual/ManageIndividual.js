@@ -16,8 +16,8 @@ const ManageIndividual = (props) => {
     }
     return (
         <>
-            { deleted ? <div class="alert alert-success" role="alert">
-                This item has been deleted!
+            { deleted ? <div className="alert alert-success" role="alert">
+                This item has been deleted!!
                 </div>
                 : <tr>
                     <td>{productName}</td>

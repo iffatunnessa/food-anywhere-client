@@ -43,7 +43,7 @@ const Checkout = () => {
     };
     return (
         <div className='container'>
-            { checkout && <div class="alert alert-success" role="alert">
+            { checkout && <div className="alert alert-success" role="alert">
                     Checkout has been uccessfully done!
                 </div>
             }

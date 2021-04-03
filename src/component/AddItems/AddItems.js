@@ -41,7 +41,7 @@ const AddItems = () => {
     };
     return (
         <div className="col-9" style={{ height: "auto", paddingBottom: "238px" }}>
-            { added && <div class="alert alert-success" role="alert">
+            { added && <div className="alert alert-success" role="alert">
                 An Item has been added!
                 </div>
             }
