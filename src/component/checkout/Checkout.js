@@ -4,12 +4,14 @@ import { UserContext } from '../../App';
 
 const Checkout = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-    const {photoURL, email} = loggedInUser;
+    const { photoURL, email, displayName } = loggedInUser;
     const { id } = useParams();
     const [data, setData] = useState({});
-    const {productName, price, size, imageURL} = data;
+    const [checkout, setCheckout] = useState(false);
+    const { productName, price, size, imageURL } = data;
+    const d = new Date();
     useEffect(() => {
-        fetch(`http://localhost:5000/checkout/${id}`)
+        fetch(`https://agile-taiga-37624.herokuapp.com/checkout/${id}`)
             .then(res => res.json())
             .then(data => {
                 setData(data[0]);
@@ -17,27 +19,34 @@ const Checkout = () => {
             })
     }, [id])
 
-    const onCheckout = (data,productId) => {
+    const onCheckout = (data, productId) => {
+        setCheckout(true);
         const eventData = {
-            productId : productId,
+            productId: productId,
             email: email,
             photoURL: photoURL,
-            productName : productName,
+            productName: productName,
             size: size,
             price: price,
             imageURL: imageURL,
+            date: d.toDateString(),
+            displayName: displayName
         }
-        const url = `http://localhost:5000/checkout/${id}`;
+        const url = `https://agile-taiga-37624.herokuapp.com/checkout/${id}`;
         console.log(eventData)
-        fetch(url,{
+        fetch(url, {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(eventData)
         })
-        .then(res=>console.log("added item(client)", res));
+            .then(res => console.log("added item(client)", res));
     };
     return (
         <div className='container'>
+            { checkout && <div class="alert alert-success" role="alert">
+                    Checkout has been uccessfully done!
+                </div>
+            }
             <table className="table table-hover">
                 <thead>
                     <tr>
@@ -57,7 +66,7 @@ const Checkout = () => {
             <div className="row">
                 <div className='col-10'></div>
                 <div className='col-2'>
-                    <button onClick={()=>onCheckout(data, id)} className='btn btn-success'>Checkout</button>
+                    <button onClick={() => onCheckout(data, id)} className='btn btn-success'>Checkout</button>
                 </div>
             </div>
         </div>

@@ -1,20 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../admin/Admin';
-import ManageIndividual from './ManageIndividual/ManageIndividual';
+import { CircularProgress } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import ManageIndividual from '../ManageIndividual/ManageIndividual';
 
 const ManageProducts = () => {
     const [items, setItems] = useState([]);
-
     useEffect(() => {
-        fetch('http://localhost:5000/admin/manageItems')
-            .then(res => res.json()) 
+        fetch('https://agile-taiga-37624.herokuapp.com/admin/manageItems')
+            .then(res => res.json())
             .then(data => setItems(data))
 
     }, [])
-    console.log(items);
-
     return (
-        // <div className='container'>
+        <div>
             <table className="table table-hover">
                 <thead>
                     <tr>
@@ -25,12 +22,18 @@ const ManageProducts = () => {
                     </tr>
                 </thead>
                 <tbody>
-                {
-                    items.map(item=> <ManageIndividual item={item}/>)
-                }
+                    {
+                        items.map(item => <ManageIndividual item={item} />)
+                    }
                 </tbody>
             </table>
-        // </div>
+            <div>
+            {
+                items.length === 0 && <div style={{ width: "100%", textAlign: "center",marginTop:"200px" }}><CircularProgress /></div>
+            }
+            </div>
+          
+        </div>
     );
 };
 

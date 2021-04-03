@@ -16,13 +16,11 @@ import NotFound from './component/NotFound/NotFound';
 import ManageProducts from './component/ManageProducts/ManageProducts';
 import AddItems from './component/AddItems/AddItems';
 
-
 export const UserContext = createContext();
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
   return (
-
     <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
       <Router>
         <div>
@@ -49,7 +47,7 @@ function App() {
             <Route path="/login">
               <Login />
             </Route>
-            <Route path="/">
+            <Route exact path="/">
               <Home />
             </Route>
             <Route path="*">
@@ -58,7 +56,6 @@ function App() {
           </Switch>
         </div>
       </Router>
-
     </UserContext.Provider >
   );
 }
